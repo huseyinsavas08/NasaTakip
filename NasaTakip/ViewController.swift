@@ -12,6 +12,7 @@ class ViewController: UIViewController {
     @IBOutlet var posterImageView: UIImageView!
     @IBOutlet var descriptionLabel:UILabel!
     @IBOutlet var copyrightLabel:UILabel!
+    @IBOutlet var dateTextField: UITextField!
     
     let networkController = NetworkController()
     
@@ -22,15 +23,26 @@ class ViewController: UIViewController {
         setInitView()
     }
     
-    private func setInitView() {
-        descriptionLabel.text = ""
-        copyrightLabel.text = ""
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        searchData()
         
-        networkController.fetchPhotoInfo { photoInfo in
+        return true
+    }
+    
+    func searchData() {
+        dateTextField.resignFirstResponder()
+        
+        guard let text = dateTextField.text, !text.isEmpty else { return }
+        networkController.fetchPhotoInfo(date: text) { photoInfo in
             if let photoInfo = photoInfo {
                 self.updateUI(with: photoInfo)
             }
         }
+    }
+    
+    private func setInitView() {
+        descriptionLabel.text = ""
+        copyrightLabel.text = ""
     }
     
     func updateUI(with photoInfo: PhotoInfo) {
@@ -50,3 +62,6 @@ class ViewController: UIViewController {
     }
 }
 
+extension ViewController: UITextFieldDelegate {
+    
+}

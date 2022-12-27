@@ -10,11 +10,11 @@ import UIKit
 
 class NetworkController {
     
-    func fetchPhotoInfo(completion: @escaping (PhotoInfo?) -> Void) {
+    func fetchPhotoInfo(date: String, completion: @escaping (PhotoInfo?) -> Void) {
         let baseUrl = URL(string: "https://api.nasa.gov/planetary/apod")!
         let query: [String: String] = [
             "api_key": "DEMO_KEY",
-            "date": "2011-07-13"
+            "date": date
         ]
         let queryUrl = baseUrl.withQueries(query)!
         
