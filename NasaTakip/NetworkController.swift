@@ -5,10 +5,9 @@
 //  Created by Hüseyin Savaş on 27.12.2022.
 //
 
-import Foundation
 import UIKit
 
-class NetworkController {
+final class NetworkController {
     
     func fetchPhotoInfo(date: String, completion: @escaping (PhotoInfo?) -> Void) {
         let baseUrl = URL(string: "https://api.nasa.gov/planetary/apod")!

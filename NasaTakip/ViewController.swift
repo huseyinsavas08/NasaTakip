@@ -9,10 +9,9 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet var posterImageView: UIImageView!
-    @IBOutlet var descriptionLabel:UILabel!
-    @IBOutlet var copyrightLabel:UILabel!
-    @IBOutlet var dateTextField: UITextField!
+    @IBOutlet weak var posterImageView: UIImageView!
+    @IBOutlet weak var descriptionLabel:UILabel!
+    @IBOutlet weak var dateTextField: UITextField!
     
     let networkController = NetworkController()
     
@@ -21,6 +20,10 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         setInitView()
+    }
+    
+    private func setInitView() {
+        descriptionLabel.text = ""
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -33,30 +36,19 @@ class ViewController: UIViewController {
         dateTextField.resignFirstResponder()
         
         guard let text = dateTextField.text, !text.isEmpty else { return }
-        networkController.fetchPhotoInfo(date: text) { photoInfo in
+        networkController.fetchPhotoInfo(date: text) { [weak self] photoInfo in
             if let photoInfo = photoInfo {
-                self.updateUI(with: photoInfo)
+                self?.updateUI(with: photoInfo)
             }
         }
     }
     
-    private func setInitView() {
-        descriptionLabel.text = ""
-        copyrightLabel.text = ""
-    }
-    
     func updateUI(with photoInfo: PhotoInfo) {
-        networkController.fetchPhoto(from: photoInfo.url) { image in
+        networkController.fetchPhoto(from: photoInfo.url!) { [weak self] image in
             DispatchQueue.main.async {
-                self.posterImageView.image = image
-                self.title = photoInfo.title
-                self.descriptionLabel.text = photoInfo.description
-                
-                if let copyright = photoInfo.copyright {
-                    self.copyrightLabel.text = copyright
-                } else {
-                    self.copyrightLabel.isHidden = true
-                }
+                self?.posterImageView.image = image
+                self?.title = photoInfo.title
+                self?.descriptionLabel.text = photoInfo.description
             }
         }
     }
