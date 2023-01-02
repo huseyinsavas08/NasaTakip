@@ -22,7 +22,7 @@
                                     <constraint firstAttribute="width" secondItem="VB0-3l-qnC" secondAttribute="height" multiplier="1:1" id="YV2-kc-bEi"/>
                                 </constraints>
                             </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Description" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="d8u-Pc-nCc">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Description" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d8u-Pc-nCc">
                                 <rect key="frame" x="16" y="492" width="361" height="310"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="textColor" systemColor="labelColor"/>
