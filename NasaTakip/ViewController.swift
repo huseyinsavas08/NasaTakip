@@ -11,9 +11,10 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var posterImageView: UIImageView!
     @IBOutlet weak var descriptionText: UITextView!
-    @IBOutlet weak var dateTextField: UITextField!
+    @IBOutlet weak var datePicker: UIDatePicker!
     
     let networkController = NetworkController()
+    let dateFormatter = DateFormatter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,19 +25,15 @@ class ViewController: UIViewController {
     
     private func setInitView() {
         descriptionText.text = ""
+        
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        datePicker.maximumDate = .now
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        searchData()
+    @IBAction func datePickerChange(_ sender: UIDatePicker) {
+        let selectedDate = dateFormatter.string(from: sender.date)
         
-        return true
-    }
-    
-    func searchData() {
-        dateTextField.resignFirstResponder()
-        
-        guard let text = dateTextField.text, !text.isEmpty else { return }
-        networkController.fetchPhotoInfo(date: text) { [weak self] photoInfo in
+        networkController.fetchPhotoInfo(date: selectedDate) { [weak self] photoInfo in
             if let photoInfo = photoInfo {
                 self?.updateUI(with: photoInfo)
             }

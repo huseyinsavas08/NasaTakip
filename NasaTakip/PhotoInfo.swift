@@ -9,9 +9,9 @@ import Foundation
 
 struct PhotoInfo: Codable {
     
-    var title: String?
-    var description: String?
-    var url: URL?
+    let title: String?
+    let description: String?
+    let url: URL?
     
     private enum CodingKeys: String, CodingKey {
         case title = "title"
