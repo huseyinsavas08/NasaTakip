@@ -10,7 +10,7 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet weak var posterImageView: UIImageView!
-    @IBOutlet weak var descriptionLabel:UILabel!
+    @IBOutlet weak var descriptionText: UITextView!
     @IBOutlet weak var dateTextField: UITextField!
     
     let networkController = NetworkController()
@@ -23,7 +23,7 @@ class ViewController: UIViewController {
     }
     
     private func setInitView() {
-        descriptionLabel.text = ""
+        descriptionText.text = ""
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -48,7 +48,7 @@ class ViewController: UIViewController {
             DispatchQueue.main.async {
                 self?.posterImageView.image = image
                 self?.title = photoInfo.title
-                self?.descriptionLabel.text = photoInfo.description
+                self?.descriptionText.text = photoInfo.description
             }
         }
     }
