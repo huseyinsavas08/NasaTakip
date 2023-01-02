@@ -12,7 +12,7 @@ final class NetworkController {
     func fetchPhotoInfo(date: String, completion: @escaping (PhotoInfo?) -> Void) {
         let baseUrl = URL(string: "https://api.nasa.gov/planetary/apod")!
         let query: [String: String] = [
-            "api_key": "DEMO_KEY",
+            "api_key": "AsQLm83QtpFevfrIgCd3cJhRs1dHGSCmJ3lYRZrr",
             "date": date
         ]
         let queryUrl = baseUrl.withQueries(query)!
