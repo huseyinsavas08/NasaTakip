@@ -1,6 +1,6 @@
 # NasaTakip
 
-Nasa için hangi gün hangi olaylar olduğunu takip et.
+Nasa için günlük olayları takip et.
 
 - NASA APIs
 - URLSession
